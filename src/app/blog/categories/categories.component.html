@@ -1,0 +1,11 @@
+<app-navbar></app-navbar>
+
+<div class="main-container">
+  <div class="row">
+    <div class="col s12 m8 l6 offset-m2 offset-l3">
+      <mat-list *ngIf="categories" class="mat-elevation-z3">
+        <mat-list-item *ngFor="let category of categories" class="waves-effect"><a routerLink="/blog/category/{{ category.id }}" style="margin-left: 50%; transform: translateX(-50%)">{{ category.name }}</a></mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

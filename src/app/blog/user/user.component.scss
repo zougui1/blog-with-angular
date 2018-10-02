@@ -1,0 +1,40 @@
+.main-container {
+  padding-top: 100px;
+  position: relative;
+}
+
+mat-card-title {
+  font-size: 2rem !important;
+  margin-bottom: 3px;
+
+  .status {
+    position: absolute;
+  }
+}
+
+mat-card-subtitle {
+  font-size: 1.35rem !important;
+}
+
+mat-card-content p {
+  font-size: 1.1rem !important;
+  padding-left: 10px;
+}
+
+mat-card-actions {
+  position: relative;
+
+  & p {
+    color: #787878;
+    position: absolute;
+    top: 0;
+    right: 1%;
+  }
+}
+
+.status {
+  width: 13px;
+  height: 13px;
+  border: 1px solid #2f3136;
+  border-radius: 50%;
+}

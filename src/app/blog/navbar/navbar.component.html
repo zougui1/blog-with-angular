@@ -1,0 +1,30 @@
+<nav class="mat-elevation-z7" (scroll)="scrollHandler($event)" [ngClass]="{'isOnTop': isOnTop}">
+  <div class="nav-wrapper">
+    <a mat-button routerLink="/blog" class="left brand-logo">Z-blog</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a mat-button routerLink="/blog/users">Users</a></li>
+      <li><a mat-button routerLink="/blog/posts">Posts</a></li>
+      <li><a mat-button routerLink="/blog/categories">Categories</a></li>
+      <li><a mat-button routerLink="/blog/tags">Tags</a></li>
+      <li *ngIf="!isLogged"><a mat-button [matMenuTriggerFor]="loginMenu">Login/Signup</a></li>
+      <li *ngIf="isLogged"><a mat-button [matMenuTriggerFor]="loggedMenu">{{ usersService.loggedUser.username }}</a></li>
+    </ul>
+  </div>
+</nav>
+
+<mat-menu #loginMenu>
+  <a mat-button routerLink="/login" class="menu-btn">Login</a>
+  <a mat-button routerLink="/blog/signup" class="menu-btn">Signup</a>
+</mat-menu>
+
+  <mat-menu #loggedMenu>
+    <a *ngIf="isLogged" mat-button routerLink="/blog/user/{{ loggedUser.userId }}" class="menu-btn">profile</a>
+    <a mat-button routerLink="/blog/post/create" class="menu-btn">Write a post</a>
+    <a *ngIf="isLogged && loggedUser.rolePower === 2"
+        mat-button routerLink="/backoffice"
+        class="menu-btn">Moderation</a>
+    <a *ngIf="isLogged && loggedUser.rolePower === 3"
+         mat-button routerLink="/backoffice"
+         class="menu-btn">Administration</a>
+    <a mat-button routerLink="/logout" class="menu-btn red-text text-darken-2">Logout</a>
+  </mat-menu>

@@ -1,0 +1,35 @@
+@import '~@angular/material/theming';
+
+nav {
+  position: fixed;
+  top: 0;
+  transition: height .2s;
+  background-color: rgba(map-get($mat-indigo, 500), 0.95);
+  z-index: 100;
+}
+
+.brand-logo {
+  padding: 5px 12px !important;
+  transform: translateY(calc(43% - 12px)) !important;
+  transition: transform .2s;
+}
+
+.menu-btn {
+  display: block;
+}
+
+ul {
+  transition: transform .2s;
+}
+
+.isOnTop {
+  height: 50px;
+}
+
+.isOnTop .brand-logo {
+  transform: translateY(calc(43% - 19px)) !important;
+}
+
+.isOnTop ul {
+  transform: translateY(-7px);
+}

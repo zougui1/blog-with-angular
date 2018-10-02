@@ -1,0 +1,40 @@
+<div *ngFor="let comment of comments">
+  <div class="row">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title><a routerLink="/blog/user/{{ comment.userId }}">{{ comment.username }}</a></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="collection-item">{{ comment.editedComment }}</p>
+      </mat-card-content>
+      <mat-card-actions align="right">
+        <p>Posted on {{ comment.dateCreated | date:'MM/dd/yyyy' }} at  {{ comment.dateCreated | date:'HH:mm:ss' }}</p>
+      </mat-card-actions>
+      <mat-card-footer>
+        <hr>
+        <div class="row">
+          <div class="col s12">
+            <div align="right">
+              <div class="icons-container">
+                <span class="counter">
+                  <a (click)="onLike(comment.id)" [disabled]="!isLogged" mat-icon-button>
+                    <mat-icon *ngIf="isLogged" class="blue-text text-darken-2">thumb_up</mat-icon>
+                    <mat-icon *ngIf="!isLogged" matTooltip="You need to be logged" class="blue-text text-darken-2">thumb_up</mat-icon>
+                  </a>
+                  <span [ngClass]="{'blue-text': isLiked, 'text-darken-2': isLiked}" align="center">{{ comment.like }}</span>
+                </span>
+                <span class="counter">
+                  <a (click)="onDislike(comment.id)" [disabled]="!isLogged" mat-icon-button>
+                    <mat-icon *ngIf="isLogged" class="red-text text-darken-2">thumb_down</mat-icon>
+                    <mat-icon *ngIf="!isLogged" matTooltip="You need to be logged" class="red-text text-darken-2">thumb_down</mat-icon>
+                    </a>
+                  <span [ngClass]="{'red-text': isDisliked, 'text-darken-2': isDisliked}" align="center">{{ comment.dislike }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

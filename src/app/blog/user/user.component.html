@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="main-container container">
+  <div class="row">
+    <div class="col s12">
+        <div class="row" *ngIf="user">
+            <mat-card>
+            <mat-card-header style="margin-bottom: 20px;">
+                <mat-card-title>
+                    <span>{{ user.username }}'s profile</span>
+                    <span class="status" [ngStyle]="{'background-color': user.statusName | status}"></span>
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p *ngIf="user.presentation">Presentation: {{ user.presentation }}</p>
+                <p>Role: {{ user.roleName }}</p>
+                <p *ngIf="isLogged && loggedUser.rolePower >= user.rolePower">Email: {{ user.email }}</p>
+                <p>Status: {{ user.statusName }}</p>
+                <p>Creation: on {{ user.dateCreated | date:'MM/dd/yyyy' }} at  {{ user.dateCreated | date:'HH:MM:SS' }}</p>
+                <p>Number of posts: {{ user.numberOfPosts }}</p>
+                <p>Number of comments: {{ user.numberOfComments }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+
+            </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+  </div>
+</div>

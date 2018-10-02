@@ -1,0 +1,28 @@
+mat-card-title a {
+    font-size: 1.2rem;
+}
+
+mat-card-actions p {
+    color: #616161;
+}
+
+mat-card-footer {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  hr {
+    margin: 10px 0 8px 0;
+  }
+
+  .icons-container {
+    width: 95px
+  }
+
+  .counter {
+    display: inline-block;
+
+    span {
+      display: block;
+    }
+  }
+}

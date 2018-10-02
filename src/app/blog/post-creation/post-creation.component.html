@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+
+<div class="main-container container">
+  <form (ngSubmit)="onSubmit()" #postCreationForm="ngForm" novalidate>
+    <div class="row">
+      <div class="col s12">
+
+        <div class="form-group">
+          <mat-form-field>
+            <input placeholder="Title" matInput type="text"
+                  minlength="5" maxlength="60"
+                  name="title"
+                  #_title
+                  [formControl]="title"
+                  [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{ _title.value.length }} / 60</mat-hint>
+            <mat-error *ngIf="title.hasError('required')">Title is required</mat-error>
+            <mat-error *ngIf="_title.value.length < 5 && !title.hasError('required')">The title must be at least 5 characters</mat-error>
+            <mat-error *ngIf="_title.value.length > 60">The title must be 60 characters or less</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput placeholder="Resume" type="text"
+                  minlength="20" maxlength="255"
+                  name="resume"
+                  #_resume
+                  [formControl]="resume"
+                  [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{ _resume.value.length }} / 255</mat-hint>
+            <mat-error *ngIf="resume.hasError('required')">Resume is required</mat-error>
+            <mat-error *ngIf="_resume.value.length < 20 && !resume.hasError('required')">The resume must be at least 20 characters</mat-error>
+            <mat-error *ngIf="_resume.value.length > 255">The resume must be 255 characters or less</mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group">
+          <mat-form-field>
+            <textarea matInput placeholder="Content" type="text"
+                  name="content"
+                  [formControl]="content"
+                  [errorStateMatcher]="matcher"></textarea>
+            <mat-error *ngIf="content.hasError('required')">Content is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <mat-chip-list #categoryChipList>
+              <mat-chip
+                *ngFor="let category of categories"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(category, 'category')">
+                {{ category }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="Categories"
+                #categoryInput
+                [formControl]="categoryCtrl"
+                [matAutocomplete]="categoryAuto"
+                [matChipInputFor]="categoryChipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event, 'category')">
+            </mat-chip-list>
+            <mat-autocomplete #categoryAuto="matAutocomplete" (optionSelected)="selected($event, 'category')">
+              <mat-option *ngFor="let category of filteredCategories | async" [value]="category">
+                {{ category }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <mat-form-field>
+            <mat-chip-list #tagChipList>
+              <mat-chip
+                *ngFor="let tag of tags"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(tag, 'tag')">
+                {{ tag }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                placeholder="Tags"
+                #tagInput
+                [formControl]="tagCtrl"
+                [matAutocomplete]="tagAuto"
+                [matChipInputFor]="tagChipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event, 'tag')">
+            </mat-chip-list>
+            <mat-autocomplete #tagAuto="matAutocomplete" (optionSelected)="selected($event, 'tag')">
+              <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                {{ tag }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="!postCreationForm.valid" type="submit" class="waves-effect waves-light btn">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>

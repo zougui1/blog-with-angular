@@ -1,0 +1,64 @@
+<form (ngSubmit)="onSubmit()" #signupForm="ngForm" novalidate>
+  <div class="row">
+    <div class="col s8 offset-s2">
+
+      <div class="form-group">
+        <mat-form-field>
+          <input placeholder="Username" matInput type="text"
+                 minlength="3" maxlength="30"
+                 #_username
+                 name="username"
+                 [formControl]="username"
+                 [errorStateMatcher]="matcher">
+            <mat-hint align="end">{{ _username.value.length }} / 30</mat-hint>
+            <mat-error *ngIf="username.hasError('required')">The username is required</mat-error>
+            <mat-error *ngIf="_username.value.length < 3 && !username.hasError('required')">The username must be at least 3 characters</mat-error>
+            <mat-error *ngIf="_username.value.length > 30">The username must be 30 characters or less</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input placeholder="Email address" matInput type="email"
+                 name="email"
+                 [formControl]="email"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="email.hasError('email')">Please enter a valid email address</mat-error>
+          <mat-error *ngIf="email.hasError('required')">Email is required</mat-error>
+         </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input placeholder="Password" matInput type="password"
+                 minlength="8" maxlength="100"
+                 #_password
+                 name="password"
+                 [formControl]="password"
+                 [errorStateMatcher]="matcher">
+          <mat-hint align="end">{{ _password.value.length }} / 100</mat-hint>
+          <mat-error *ngIf="password.hasError('required')">The password is required</mat-error>
+          <mat-error *ngIf="_password.value.length < 8 && !password.hasError('required')">The password must be at least 8 characters</mat-error>
+          <mat-error *ngIf="_password.value.length > 100">The password must be 100 characters or less</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field>
+          <input placeholder="Confirm password" matInput type="password"
+                 #_confirmPassword
+                 name="confirmPassword"
+                 [formControl]="confirmPassword"
+                 [errorStateMatcher]="matcher">
+          <mat-error *ngIf="password.hasError('required')">The confirm password is required</mat-error>
+          <mat-error *ngIf="!arePasswordsSame">Both passwords are differents</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="!signupForm.valid" type="submit" class="waves-effect waves-light btn">Signup</button>
+      </div>
+
+    </div>
+  </div>
+</form>

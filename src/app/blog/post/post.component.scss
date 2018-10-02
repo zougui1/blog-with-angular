@@ -1,0 +1,66 @@
+.main-container {
+  padding-top: 100px;
+  position: relative;
+}
+
+mat-card-title {
+  font-size: 2rem !important;
+  margin-bottom: 3px;
+  a {
+    color: inherit;
+  }
+}
+
+mat-card-subtitle {
+  font-size: 1.35rem !important;
+}
+
+mat-card-content p {
+  font-size: 1.1rem !important;
+  padding-left: 10px;
+}
+
+mat-card-actions {
+  position: relative;
+ p {
+  color: #787878;
+  position: absolute;
+  top: 0;
+  right: 1%;
+ }
+}
+
+mat-card-footer {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  hr {
+    margin: 40px 0 20px 0;
+  }
+
+  .icons-container {
+    width: 95px
+  }
+
+  .counter {
+    display: inline-block;
+    
+    span {
+      display: block;
+    }
+  }
+}
+
+.list-header {
+  font-size: 1.2rem;
+}
+
+.list-item {
+  a {
+    color: #494949;
+  }
+
+  span {
+    color: initial;
+  }
+}
